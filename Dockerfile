@@ -1,6 +1,6 @@
 FROM ruby:2.6-buster
 
-LABEL maintainer="Luan Ribeiro"
+LABEL maintainer="Luan M Ribeiro"
 
 RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
   apt-transport-https
@@ -17,6 +17,9 @@ RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
 
 COPY Gemfile* /usr/src/app/
 WORKDIR /usr/src/app
+
+# Indica outro caminho onde serão instaladas as gems pelo bundle
+ENV BUNDLE_PATH /gems
 RUN bundle install
 
 COPY . /usr/src/app/
