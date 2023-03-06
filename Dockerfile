@@ -18,10 +18,15 @@ RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
 COPY Gemfile* /usr/src/app/
 WORKDIR /usr/src/app
 
-# Indica outro caminho onde serão instaladas as gems pelo bundle
+# Indicates another path where the gems will
+# be installed by the bundle
 ENV BUNDLE_PATH /gems
 RUN bundle install
 
 COPY . /usr/src/app/
+
+# It's necessary to change file permission to:
+# chmod +x docker-entrypoint.sh
+ENTRYPOINT [ "./docker-entrypoint.sh" ]
 
 CMD ["bin/rails", "s", "-b", "0.0.0.0"]

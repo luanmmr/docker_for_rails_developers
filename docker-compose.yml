@@ -3,6 +3,12 @@ version: '3'
 services:
   web:
     build: .
+    # Using entrypoint here, the default entrypoint in Dockerfile
+    # and also CMD will be ignored. However, it's possible adds
+    # "command" also here, then everything will work.
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/#entrypoint
+    #
+    # entrypoint: ./docker-entrypoint.sh
     ports:
       - 3000:3000
       - 4000:4000
